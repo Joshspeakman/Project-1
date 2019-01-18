@@ -6,7 +6,7 @@ var queryURL;
 function buildQueryURL() {
 
 
-    queryURL = 'http://api.amp.active.com/v2/search/?';
+    queryURL = 'https://api.amp.active.com/v2/search/?';
     console.log(queryURL);
 
 
@@ -56,30 +56,32 @@ $('#run-search').on('click', function () {
     event.preventDefault(); //halts bubble up which prevents page reload
     buildQueryURL(); //call function to build queru
 
-    //Data request using AJAX GET request
-    $.ajax({
-        url: queryURL, //!!!!!queryURL not getting passed here yet, probably because var set within function
-        method: "GET",
-        // contentType: 'application/json',
-        // dataType: 'jsonp',
-        beforeSend: function(xhr){
-          xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-          xhr.setRequestHeader("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with");
-        },
-      }).then(function (response) {
-        $("#activities-section").text(JSON.stringify(response));
-        console.log(response);
-      });
+//     //Data request using AJAX GET request
+//     $.ajax({
+//         url: queryURL, //!!!!!queryURL not getting passed here yet, probably because var set within function
+//         method: "GET",
+//         // contentType: 'application/json',
+//         // dataType: 'jsonp',
+//         beforeSend: function(xhr){
+//           xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+//           // xhr.setRequestHeader("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with");
+//           xhr.setRequestHeader('Access-Control-Allow-Headers', "Origin, Content-Type, X-Auth-Token");
+//           xhr.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+//         },
+//       }).then(function (response) {
+//         $("#activities-section").text(JSON.stringify(response));
+//         console.log(response);
+//       });
 
 
     
     // $.ajax({
-    //     url: queryURL, //!!!!!queryURL not getting passed here yet, probably because var set within function
+    //     url: queryURL, 
     //     method: "GET",
     //     headers: {
-    //         // 'Access-Control-Allow-Credentials': true,
-    //         'Access-Control-Allow-Origin': '*',
-    //         // 'Access-Control-Allow-Methods': 'GET',
+    //         'Access-Control-Allow-Credentials': true,
+    //         'Access-Control-Allow-Origin': 'http://api.amp.active.com',
+    //         'Access-Control-Allow-Methods': 'GET',
     //         'Access-Control-Allow-Headers': 'application/json',
     //     }
     // }).then(function (response) {
@@ -87,11 +89,11 @@ $('#run-search').on('click', function () {
     //     console.log(response);
     // });
 
-    // $.getJSON(queryURL, function (response) {
-    //     $("#activities-section").text(JSON.stringify(response));
-    //     console.log(response);
+    $.getJSON(queryURL, function (response) {
+        $("#activities-section").text(JSON.stringify(response));
+        console.log(response);
 
-    // })
+    })
 });
 
 
