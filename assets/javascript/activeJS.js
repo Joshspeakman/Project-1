@@ -39,14 +39,18 @@ function buildQueryURL() {
     var queryRadius = 'radius=' + radius;
     console.log(queryRadius);
 
-    var startDate = moment().format('YYYY-MM-DD');
-    var endDate = moment(startDate).add(7, 'days').format('YYYY-MM-DD');
-    console.log(endDate);
-    // var startDate = $('#start-date').val().trim();
+    var weatherStartDate = moment().format('YYYY-MM-DD');
+    var weatherEndDate = moment(startDate).add(5, 'days').format('YYYY-MM-DD');
+    
+    console.log(weatherStartDate);
+    console.log(weatherEndDate);
+
+
+    var startDate = $('#start-date').val().trim();
     var queryStartDate = '&start_date=' + startDate + '..'; //two periods at end tell API request to search from that data forward
     console.log(queryStartDate);
 
-    // var endDate = $('#end-date').val().trim();
+    var endDate = $('#end-date').val().trim();
     var queryEndDate = endDate;
     console.log(queryEndDate);
 
