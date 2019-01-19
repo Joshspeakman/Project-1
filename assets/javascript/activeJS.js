@@ -3,6 +3,7 @@
 // http://api.amp.active.com/v2/search/?radius=20&city=Denver&state=CO&query=marathon&current_page=1&per_page=10&sort=distance&start_date=2019-01-01..&exclude_children=false&api_key=3bxc5qpjw2rq4ffsnssvztxk
 var queryURL;
 
+
 function buildQueryURL() {
 
 
@@ -90,12 +91,30 @@ $('#run-search').on('click', function () {
     // });
 
     $.getJSON(queryURL, function (response) {
-        $("#activities-section").text(JSON.stringify(response));
+        // $("#activities-section").text(JSON.stringify(response));
         console.log(response);
+
+        response.results.forEach (function(event) {
+
+        
+        $("#activities-section").append("Activity Date: " + event.activityStartDate);
+
+
+        $("#activities-section").append('<p> Activity End Date: '+ event.activityEndDate +'</p>');
+
+        $("#activities-section").append('<p> Activity Description: '+ event.assetDescriptions[0].description +'</p>');
+
+        });
+
+
+
 
     })
 });
 
+function limit_dates() {
+ 
+}
 
 
 
