@@ -39,15 +39,22 @@ function buildQueryURL() {
     var queryRadius = 'radius=' + radius;
     console.log(queryRadius);
 
+    var weatherStartDate = moment().format('YYYY-MM-DD');
+    var weatherEndDate = moment(startDate).add(5, 'days').format('YYYY-MM-DD');
+    
+    console.log(weatherStartDate);
+    console.log(weatherEndDate);
+
+
     var startDate = $('#start-date').val().trim();
     var queryStartDate = '&start_date=' + startDate + '..'; //two periods at end tell API request to search from that data forward
     console.log(queryStartDate);
 
     var endDate = $('#end-date').val().trim();
-    var queryEndDate = '&end_date=' + endDate;
+    var queryEndDate = endDate;
     console.log(queryEndDate);
 
-    queryURL = queryURL + queryRadius + queryCity + queryState + queryStartDate + queryActivity + pages + excludeChildren + queryParams;
+    queryURL = queryURL + queryRadius + queryCity + queryState + queryStartDate + queryEndDate + queryActivity + pages + excludeChildren + queryParams;
     console.log(queryURL);
 }
 
@@ -96,13 +103,14 @@ $('#run-search').on('click', function () {
 
         response.results.forEach (function(event) {
 
-        
-        $("#activities-section").append("Activity Date: " + event.activityStartDate);
+          $("#activities-section").append("Activity Date: " + event.activityStartDate);
 
 
-        $("#activities-section").append('<p> Activity End Date: '+ event.activityEndDate +'</p>');
 
-        $("#activities-section").append('<p> Activity Description: '+ event.assetDescriptions[0].description +'</p>');
+
+          // $("#activities-section").append('<p> Activity End Date: '+ event.activityEndDate +'</p>');
+
+          $("#activities-section").append('<p> Activity Description: '+ event.assetDescriptions[0].description +'</p>');
 
         });
 
