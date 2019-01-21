@@ -101,16 +101,31 @@ $('#run-search').on('click', function () {
         // $("#activities-section").text(JSON.stringify(response));
         console.log(response);
 
+ 
+ 
         response.results.forEach (function(event) {
 
-          $("#activities-section").append("Activity Date: " + event.activityStartDate);
+        //   $("#activities-section").append('Activity Date: ' + event.activityStartDate + '<hr>');
 
+          var eventDate = event.activityStartDate;
 
+          var dateLength = eventDate.length;
 
+          if (dateLength>10) {
+            var activityDate = eventDate.substr(0,10);
+        }
 
           // $("#activities-section").append('<p> Activity End Date: '+ event.activityEndDate +'</p>');
 
-          $("#activities-section").append('<p> Activity Description: '+ event.assetDescriptions[0].description +'</p>');
+          var eventText = event.assetDescriptions[0].description;
+
+          var len = eventText.length;
+          
+          if(len>500) {
+              var shortStr = eventText.substr(0,500)+'...';
+          }
+
+          $("#activities-section").append('<div class = "card shadow p-3 mb-5 bg-white rounded activity-card"><div class = "card-header activity-card-header">Activity Date: ' + activityDate +'<div class= "card body activity card body"><p class = "activity-text" Activity Description: '+ shortStr +'</p></div><div></div>');
 
         });
 
