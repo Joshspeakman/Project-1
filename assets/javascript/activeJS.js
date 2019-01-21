@@ -4,7 +4,7 @@
 var queryURL;
 
 
-function buildQueryURL() {
+function buildActiveQuery() {
 
 
     queryURL = 'https://api.amp.active.com/v2/search/?';
@@ -60,9 +60,10 @@ function buildQueryURL() {
 
 
 
-$('#run-search').on('click', function () {
+$('#run-search').on('click', function () { //begin user submit event
+
     event.preventDefault(); //halts bubble up which prevents page reload
-    buildQueryURL(); //call function to build queru
+    buildActiveQuery(); //call function to build queru
 
 //     //Data request using AJAX GET request
 //     $.ajax({
@@ -125,22 +126,40 @@ $('#run-search').on('click', function () {
               var shortStr = eventText.substr(0,500)+'...';
           }
 
-          $("#activities-section").append('<div class = "card shadow p-3 mb-5 bg-white rounded activity-card"><div class = "card-header activity-card-header">Activity Date: ' + activityDate +'<div class= "card body activity card body"><p class = "activity-text" Activity Description: '+ shortStr +'</p></div><div></div>');
+          $("#activities-section").append('<div class = "card shadow p-3 mb-5 bg-white rounded activity-card"><div class = "card-header activity-card-header">Activity Date: ' + 
+            activityDate +'<div class= "card body activity card body"><p id="weather" class ="activity-text" Activity Description: '+ shortStr +'</p></div><div></div>');
 
         });
 
+    }) //end active getJSON
 
+    // OPEN WEATHER AJAX ------------------------------------------------------------
+    var APIKey = "21523de10c9a466981da36b75e628021";
+   
+    var city = $('#city-term').val().trim();
+    var queryCity = 'q=' + city;
 
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?" + queryCity + ",us&APPID=" + APIKey;
 
+    // run AJAX call to the OpenWeatherMap API
+    $.ajax({
+        url: queryURL,
+        method: "GET"
     })
-});
+        // store retrieved data inside response object
+        .then(function(response) {
 
-function limit_dates() {
- 
-}
+        // Log the queryURL
+        console.log(queryURL);
+
+        // Log the resulting object
+        console.log(response);
+
+            $("#weather").append(response.list[0].weather[0].main);
 
 
+    }); //end openweather ajax 
 
+  
 
-
-// console.log(queryURL);
+})//end user submit event 
