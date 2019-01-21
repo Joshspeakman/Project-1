@@ -118,6 +118,12 @@ $('#run-search').on('click', function () {
           // $("#activities-section").append('<p> Activity End Date: '+ event.activityEndDate +'</p>');
 
           var eventText = event.assetDescriptions[0].description;
+          
+           $('img').removeAttr('src');
+
+          var activityImage = event.logoUrlAdr;
+          console.log(activityImage);
+          
 
           var len = eventText.length;
           
@@ -125,7 +131,11 @@ $('#run-search').on('click', function () {
               var shortStr = eventText.substr(0,500)+'...';
           }
 
-          $("#activities-section").append('<div class = "card shadow p-3 mb-5 bg-white rounded activity-card"><div class = "card-header activity-card-header">Activity Date: ' + activityDate +'<div class= "card body activity card body"><p class = "activity-text" Activity Description: '+ shortStr +'</p></div><div></div>');
+          $("#activities-section").append('<div class = "card-deck shadow p-3 mb-5 bg-white rounded activity-card"><div class = "card-header activity-card-header">Activity Date: ' + activityDate + '<div class= "card body activity-card-body"><p class = "activity-text" Activity Description: '+ shortStr +'</p></div><div></div>');
+
+        //   var backgroundImg = event.logoUrlAdr;
+        //   $('.activity-card-body').css('background-image', 'url(' + backgroundImg + ')');
+
 
         });
 
