@@ -1,126 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
- 
-<head>
-  <meta charset="UTF-8">
-  <title>ACTIVE API</title>
-  <!-- Bootstrap CSS CDN  -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+<html>
 
-  <!-- Font Awesome CSS Icons (For cool glyphicons) -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500" rel="stylesheet" />
+
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+    crossorigin="anonymous">
 
   <!--Moment Link -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
-  <!-- Style to fix the issue of text extending past card length -->
-  <style>
-  
-   .card-header {
-      font-weight: bold;
-    }
 
-    .activity-card-body {
-      padding: 1em;
-      font-weight: 400;
-    }
 
-    /* .activity-card {
-      border: 2px solid blue;
-    } */
-  </style>
+  <link href="css/main.css" rel="stylesheet" />
+
+
 </head>
 
 <body>
 
-  <!-- Main Bootstrap Search -->
-  <div class="container">
-
-    <!-- Jumbotron for Title -->
-    <div class="jumbotron" style="background-color: #20315A ; color: white;">
-      <h1 class="text-center">
-        <strong>
-           Active API</strong>
-      </h1>
-    </div>
-
-    <!-- Row for Searching Activity -->
-    <div class="row">
-      <div class="col-sm-12">
-        <br>
-        <!-- First card is for handling the search parameters -->
-        <div class="card">
-          <div class="card-header">
-            <strong>
-              <i class="fa fa-list-alt"></i> Search Parameters</strong>
-          </div>
-          <div class="card-body">
-
-            <!-- Here we create an HTML Form for handling the inputs-->
-            <form role="form">
-
-              <!-- Here we create the text boxs for capturing the activity type, city, state-->
-                <div class="form-group">
-                    <label for="search">Activity Type:</label>
-                    <input type="text" class="form-control" id="activity-term">
-                </div>
-
-                <div class="form-group">
-                        <label for="search">City:</label>
-                        <input type="text" class="form-control" id="city-term">
-                </div>    
-                
-                <div class="form-group">
-                        <label for="search">State (e.g., CO for Colorado):</label>
-                        <input type="text" class="form-control" id="state-term">
-                </div>       
-                  
-              
-
-              
-
-              <!-- Here we capture the distance   -->
-              <div class="form-group">
-                <label for="pwd">Maximuim Distance From Location (miles):</label>
-                <select id="max-radius" class="custom-select" aria-labelledby="dropdownMenuButton">
-                  <option selected value="1">1</option>
-                  <!-- Setting the option for 5 as default -->
-                  <option value="5" selected>5</option>
-                  <option value="10">10</option>
-                  <option value="15">15</option> 
-                  <option value="20">20</option>                
-                </select>
-              </div>
-
-              <!-- Here we capture the Start Year Parameter-->
-              <div class="form-group">
-                <label for="start-year">From Date (YYYY-MM-DD):</label>
-                <input type="text" class="form-control" id="start-date">
-              </div>
-
-              <!-- Here we capture the End Year Parameter -->
-              <div class="form-group">
-                <label for="end-year">End Date (YYYY-MM-DD):</label>
-                <input type="text" class="form-control" id="end-date">
-              </div>
-
-              <!-- Here we have our final submit button -->
-              <button type="submit" class="btn btn-default" id="run-search">
-                <i class="fa fa-search"></i> Search</button>
-              <!-- <button class="btn btn-default" id="clear-all">
-                <i class="fa fa-trash"></i> Clear Results</button> -->
-
-            </form>
-          </div>
+  <div class="main-content">
+    <form>
+      <div class="title">
+        <h1>Stay Active</h1>
+      </div>
+      <div class="inner-form">
+        <div class="input-field first">
+          <input id="search" type="text" placeholder="LET'S DO..." />
+        </div>
+        <div class="input-field second">
+          <input class="search" id="city" type="text" placeholder="CITY" />
+        </div>
+        <div class="input-field third">
+          <input class="datepicker" id="state" type="text" placeholder="STATE" />
+        </div>
+        <div class="input-field fouth">
+          <input type="number" id="miles" placeholder="MILES AWAY">
+          </select>
+        </div>
+        <div class="input-field fifth">
+          <button class="btn-search" id="run-search" type="button">ADVENTURE</button>
         </div>
       </div>
-    </div>
+    </form>
+  </div>
+
+
 
     <!-- This row will handle all of the retrieved activities -->
     <div class="row">
       <div class="col-sm-12">
         <br>
 
-        <!-- This card will initially be made up of a card and wells for each of the articles retrieved -->
+        <!-- This card will initially be made up of a card and wells for each of the activities retrieved -->
         <div class="card">
 
           <!-- card Heading for the retrieved activities box -->
@@ -136,28 +71,37 @@
       </div>
     </div>
 
-    <!-- Footer Region -->
-    <div class="row">
-      <div class="col-sm-12">
 
-        <!-- Line Break followed by closing -->
-        <hr>
-        <h5 class="text-center">
-          <small>This somewhat Works :|
-          </small>
-        </h5>
-
-      </div>
+  <!-- <div class="card" style="width: 100%;" id="activities-section">
+    <div class="card-body" id="activities-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+        content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
     </div>
+  </div> -->
 
-  </div>
-
-  <!-- jQuery JS -->
-  <script src="https://code.jquery.com/jquery.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
-  <!-- Code to the JavaScript File -->
-  <script src="./assets/javascript/activeJS.js"></script>
+  <!-- <div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+        content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div> -->
 
 </body>
+
+
+
+
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
+  <script src="./javascript/activeJS.js"></script>
+
 
 </html>

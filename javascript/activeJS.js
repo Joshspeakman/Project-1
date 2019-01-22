@@ -19,23 +19,23 @@ function buildQueryURL() {
 
     console.log(queryParams);
 
-    var activity = $('#activity-term').val().trim();
+    var activity = $('#search').val().trim();
     var queryActivity = '&query=' + activity;
 
     // console.log(activity);
     console.log(queryActivity);
 
-    var city = $('#city-term').val().trim();
+    var city = $('#city').val().trim();
     var queryCity = '&city=' + city;
     // console.log('The city is:'+city);
 
     console.log(queryCity);
 
-    var state = $('#state-term').val().trim();
+    var state = $('#state').val().trim();
     var queryState = '&state=' + state;
     console.log(queryState);
 
-    var radius = $('#max-radius').val().trim();
+    var radius = $('#miles').val().trim();
     var queryRadius = 'radius=' + radius;
     console.log(queryRadius);
 
@@ -46,11 +46,11 @@ function buildQueryURL() {
     console.log(weatherEndDate);
 
 
-    var startDate = $('#start-date').val().trim();
-    var queryStartDate = '&start_date=' + startDate + '..'; //two periods at end tell API request to search from that data forward
+    var startDate = weatherStartDate;
+    var queryStartDate = '&start_date=' + startDate + '..'; //two periods at end tell API request to search from that date forward
     console.log(queryStartDate);
 
-    var endDate = $('#end-date').val().trim();
+    var endDate = moment(startDate).add(1, 'y').format('YYYY-MM-DD');
     var queryEndDate = endDate;
     console.log(queryEndDate);
 
@@ -61,25 +61,25 @@ function buildQueryURL() {
 
 
 $('#run-search').on('click', function () {
-    event.preventDefault(); //halts bubble up which prevents page reload
-    buildQueryURL(); //call function to build queru
+    event.preventDefault(); 
+    buildQueryURL(); //call function to build query
 
-//     //Data request using AJAX GET request
-//     $.ajax({
-//         url: queryURL, //!!!!!queryURL not getting passed here yet, probably because var set within function
-//         method: "GET",
-//         // contentType: 'application/json',
-//         // dataType: 'jsonp',
-//         beforeSend: function(xhr){
-//           xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-//           // xhr.setRequestHeader("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with");
-//           xhr.setRequestHeader('Access-Control-Allow-Headers', "Origin, Content-Type, X-Auth-Token");
-//           xhr.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-//         },
-//       }).then(function (response) {
-//         $("#activities-section").text(JSON.stringify(response));
-//         console.log(response);
-//       });
+    //     //Data request using AJAX GET request
+    //     $.ajax({
+    //         url: queryURL, //!!!!!queryURL not getting passed here yet, probably because var set within function
+    //         method: "GET",
+    //         // contentType: 'application/json',
+    //         // dataType: 'jsonp',
+    //         beforeSend: function(xhr){
+    //           xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+    //           // xhr.setRequestHeader("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with");
+    //           xhr.setRequestHeader('Access-Control-Allow-Headers', "Origin, Content-Type, X-Auth-Token");
+    //           xhr.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    //         },
+    //       }).then(function (response) {
+    //         $("#activities-section").text(JSON.stringify(response));
+    //         console.log(response);
+    //       });
 
 
     
@@ -96,6 +96,8 @@ $('#run-search').on('click', function () {
     //     $("#activities-section").text(JSON.stringify(response));
     //     console.log(response);
     // });
+
+    // window.location.href = "activity_page.html";
 
     $.getJSON(queryURL, function (response) {
         // $("#activities-section").text(JSON.stringify(response));
@@ -123,6 +125,8 @@ $('#run-search').on('click', function () {
 
           var activityImage = event.logoUrlAdr;
           console.log(activityImage);
+
+          $('.card-image-top').attr('src', activityImage);
           
 
           var len = eventText.length;
@@ -133,8 +137,8 @@ $('#run-search').on('click', function () {
 
           $("#activities-section").append('<div class = "card-deck shadow p-3 mb-5 bg-white rounded activity-card"><div class = "card-header activity-card-header">Activity Date: ' + activityDate + '<div class= "card body activity-card-body"><p class = "activity-text" Activity Description: '+ shortStr +'</p></div><div></div>');
 
-        //   var backgroundImg = event.logoUrlAdr;
-        //   $('.activity-card-body').css('background-image', 'url(' + backgroundImg + ')');
+            //   var backgroundImg = event.logoUrlAdr;
+            //   $('.activity-card-body').css('background-image', 'url(' + backgroundImg + ')');
 
 
         });
@@ -142,15 +146,9 @@ $('#run-search').on('click', function () {
 
 
 
-    })
+    });
 });
 
-function limit_dates() {
- 
-}
+// 
 
-
-
-
-
-// console.log(queryURL);
+//'<img class="card-img-top" src="'+ activityImage + '"  alt="Card image cap">

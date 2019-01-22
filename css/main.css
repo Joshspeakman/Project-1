@@ -1,0 +1,117 @@
+
+body {
+  margin: 0;
+}
+
+
+.main-content {
+  min-height: 100vh;
+  display: flex;
+      justify-content: center;
+      align-items: center;
+  font-family: 'Poppins', sans-serif;
+  background: url("../images/birthday.jpg");
+}
+
+form {
+  width: 80%;
+}
+
+h1 {
+  font-size: 60px;
+  color: #fff;
+  margin-bottom: 60px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.inner-form {
+  background: rgba(252, 150, 150, 0.5);
+  padding: 16px;
+  display: flex;
+  width: 100%;
+      justify-content: space-between;
+      align-items: center;
+}
+
+
+input {
+  height: 70px;
+  background: #fff;
+  border-radius: 0;
+  border: 0;
+  display: block;
+  width: 100%;
+  padding: 10px 20px 10px 45px;
+  font-size: 16px;
+  color: #555;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+
+.input-field {
+  color: #9a9a9a;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+
+.first {
+      flex-grow: 1;
+}
+
+.second {
+  min-width: 190px;
+  max-width: 190px;
+}
+
+.third {
+  min-width: 190px;
+  max-width: 190px;
+}
+
+.fourth {
+  min-width: 190px;
+  max-width: 190px;
+  border-right: 0;
+}
+
+
+.fifth {
+  min-width: 190px;
+  max-width: 190px;
+  padding-left: 10px;
+  border-right: 0;
+}
+
+.fifth .btn-search {
+  height: 70px;
+  width: 100%;
+  background:red;
+  font-size: 20px;
+  color: #fff;
+  border: 0;
+  font-weight: 400;
+  font-family: 'Poppins', sans-serif;
+}
+
+.fifth .btn-search:hover {
+  background: rgba(255, 136, 0, 0.932);
+}
+
+.card-header {
+  font-weight: bold;
+}
+
+.card-img-top {
+  height: 40%;
+  width: 30%;
+}
+
+.activity-card-body {
+  padding: 1em;
+  font-weight: 400;
+}
