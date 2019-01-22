@@ -11,6 +11,8 @@ body {
       align-items: center;
   font-family: 'Poppins', sans-serif;
   background: url("../images/birthday.jpg");
+  background-size: cover;
+  
 }
 
 form {
@@ -29,6 +31,8 @@ h1 {
   background: rgba(252, 150, 150, 0.5);
   padding: 16px;
   display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
   width: 100%;
       justify-content: space-between;
       align-items: center;
@@ -56,6 +60,7 @@ input {
   font-size: 16px;
   font-weight: 400;
   text-transform: uppercase;
+  padding: 10px 0px 10px 0px;
 }
 
 
