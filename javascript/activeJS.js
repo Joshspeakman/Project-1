@@ -1,152 +1,155 @@
-//Example API Response
+$(document).ready(function() {
 
-// http://api.amp.active.com/v2/search/?radius=20&city=Denver&state=CO&query=marathon&current_page=1&per_page=10&sort=distance&start_date=2019-01-01..&exclude_children=false&api_key=3bxc5qpjw2rq4ffsnssvztxk
-var queryURL;
-
-
-function buildQueryURL() {
+    var queryURL;
 
 
-    queryURL = 'https://api.amp.active.com/v2/search/?';
-    console.log(queryURL);
+    function buildQueryURL() {
 
 
-    var queryParams = '&api_key=3bxc5qpjw2rq4ffsnssvztxk';
+        queryURL = 'https://api.amp.active.com/v2/search/?';
+        console.log(queryURL);
 
-    var pages = '&current_page=1&per_page=10&sort=distance';
 
-    var excludeChildren = '&exclude_children=false';
+        var queryParams = '&api_key=3bxc5qpjw2rq4ffsnssvztxk';
 
-    console.log(queryParams);
+        var pages = '&current_page=1&per_page=10&sort=distance';
 
-    var activity = $('#search').val().trim();
-    var queryActivity = '&query=' + activity;
+        var excludeChildren = '&exclude_children=false';
 
-    // console.log(activity);
-    console.log(queryActivity);
+        console.log(queryParams);
 
-    var city = $('#city').val().trim();
-    var queryCity = '&city=' + city;
-    // console.log('The city is:'+city);
+        var activity = $('#search').val().trim();
+        var queryActivity = '&query=' + activity;
 
-    console.log(queryCity);
+        // console.log(activity);
+        console.log(queryActivity);
 
-    var state = $('#state').val().trim();
-    var queryState = '&state=' + state;
-    console.log(queryState);
+        var city = $('#city').val().trim();
+        var queryCity = '&city=' + city;
+        // console.log('The city is:'+city);
 
-    var radius = $('#miles').val().trim();
-    var queryRadius = 'radius=' + radius;
-    console.log(queryRadius);
+        console.log(queryCity);
 
-    var weatherStartDate = moment().format('YYYY-MM-DD');
-    var weatherEndDate = moment(startDate).add(5, 'days').format('YYYY-MM-DD');
+        var state = $('#state').val().trim();
+        var queryState = '&state=' + state;
+        console.log(queryState);
+
+        var radius = $('#miles').val().trim();
+        var queryRadius = 'radius=' + radius;
+        console.log(queryRadius);
+
+        var weatherStartDate = moment().format('YYYY-MM-DD');
+        var weatherEndDate = moment(startDate).add(5, 'days').format('YYYY-MM-DD');
+        
+        console.log(weatherStartDate);
+        console.log(weatherEndDate);
+
+
+        var startDate = weatherStartDate;
+        var queryStartDate = '&start_date=' + startDate + '..'; //two periods at end tell API request to search from that date forward
+        console.log(queryStartDate);
+
+        var endDate = moment(startDate).add(1, 'y').format('YYYY-MM-DD');
+        var queryEndDate = endDate;
+        console.log(queryEndDate);
+
+        queryURL = queryURL + queryRadius + queryCity + queryState + queryStartDate + queryEndDate + queryActivity + pages + excludeChildren + queryParams;
+        console.log(queryURL);
+    }
+
+
+
+    $('#run-search').on('click', function () {
+        event.preventDefault(); 
+        buildQueryURL(); //call function to build query
+
+        //     //Data request using AJAX GET request
+        //     $.ajax({
+        //         url: queryURL, //!!!!!queryURL not getting passed here yet, probably because var set within function
+        //         method: "GET",
+        //         // contentType: 'application/json',
+        //         // dataType: 'jsonp',
+        //         beforeSend: function(xhr){
+        //           xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+        //           // xhr.setRequestHeader("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with");
+        //           xhr.setRequestHeader('Access-Control-Allow-Headers', "Origin, Content-Type, X-Auth-Token");
+        //           xhr.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+        //         },
+        //       }).then(function (response) {
+        //         $("#activities-section").text(JSON.stringify(response));
+        //         console.log(response);
+        //       });
+
+
+        
+        // $.ajax({
+        //     url: queryURL, 
+        //     method: "GET",
+        //     headers: {
+        //         'Access-Control-Allow-Credentials': true,
+        //         'Access-Control-Allow-Origin': 'http://api.amp.active.com',
+        //         'Access-Control-Allow-Methods': 'GET',
+        //         'Access-Control-Allow-Headers': 'application/json',
+        //     }
+        // }).then(function (response) {
+        //     $("#activities-section").text(JSON.stringify(response));
+        //     console.log(response);
+        // });
+
+        // window.location.href = "activity_page.html";
+
+        $.getJSON(queryURL, function (response) {
+            // $("#activities-section").text(JSON.stringify(response));
+            console.log(response);
+
     
-    console.log(weatherStartDate);
-    console.log(weatherEndDate);
+
+            response.results.forEach (function(event) {
+
+            //   $("#activities-section").append('Activity Date: ' + event.activityStartDate + '<hr>');
+                
 
 
-    var startDate = weatherStartDate;
-    var queryStartDate = '&start_date=' + startDate + '..'; //two periods at end tell API request to search from that date forward
-    console.log(queryStartDate);
+                var eventDate = event.activityStartDate;
 
-    var endDate = moment(startDate).add(1, 'y').format('YYYY-MM-DD');
-    var queryEndDate = endDate;
-    console.log(queryEndDate);
+                var dateLength = eventDate.length;
 
-    queryURL = queryURL + queryRadius + queryCity + queryState + queryStartDate + queryEndDate + queryActivity + pages + excludeChildren + queryParams;
-    console.log(queryURL);
-}
+                if (dateLength>10) {
+                var activityDate = eventDate.substr(0,10);
+                }
 
+                // $("#activities-section").append('<p> Activity End Date: '+ event.activityEndDate +'</p>');
 
-
-$('#run-search').on('click', function () {
-    event.preventDefault(); 
-    buildQueryURL(); //call function to build query
-
-    //     //Data request using AJAX GET request
-    //     $.ajax({
-    //         url: queryURL, //!!!!!queryURL not getting passed here yet, probably because var set within function
-    //         method: "GET",
-    //         // contentType: 'application/json',
-    //         // dataType: 'jsonp',
-    //         beforeSend: function(xhr){
-    //           xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-    //           // xhr.setRequestHeader("Access-Control-Allow-Headers", "origin, content-type, accept, x-requested-with");
-    //           xhr.setRequestHeader('Access-Control-Allow-Headers', "Origin, Content-Type, X-Auth-Token");
-    //           xhr.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    //         },
-    //       }).then(function (response) {
-    //         $("#activities-section").text(JSON.stringify(response));
-    //         console.log(response);
-    //       });
+                var eventText = event.assetDescriptions[0].description;
+            
+                $('div').remove('img');
 
 
-    
-    // $.ajax({
-    //     url: queryURL, 
-    //     method: "GET",
-    //     headers: {
-    //         'Access-Control-Allow-Credentials': true,
-    //         'Access-Control-Allow-Origin': 'http://api.amp.active.com',
-    //         'Access-Control-Allow-Methods': 'GET',
-    //         'Access-Control-Allow-Headers': 'application/json',
-    //     }
-    // }).then(function (response) {
-    //     $("#activities-section").text(JSON.stringify(response));
-    //     console.log(response);
-    // });
+                var activityImage = event.logoUrlAdr;
+                console.log(activityImage);
 
-    // window.location.href = "activity_page.html";
+                $('.card-image-top').attr('src', activityImage);
+            
 
-    $.getJSON(queryURL, function (response) {
-        // $("#activities-section").text(JSON.stringify(response));
-        console.log(response);
+                var len = eventText.length;
+            
+                if(len>500) {
+                    var shortStr = eventText.substr(0,500)+'...';
+                }
 
- 
- 
-        response.results.forEach (function(event) {
+                $("#activities-section").append('<div class = "card-deck shadow p-3 mb-5 bg-white rounded activity-card"><div class = "card"><img class="card-img-top" src="'+ activityImage + '"  alt="Card image cap"><div class = "card-header activity-card-header">Activity Date: ' + activityDate + '<div class= "card body activity-card-body"><p class = "activity-text" Activity Description: '+ shortStr +'</p></div></div></div></div>');
 
-        //   $("#activities-section").append('Activity Date: ' + event.activityStartDate + '<hr>');
+                // $("#activities-section").append('<div class = "card"><img class="card-img-top" src="'+ activityImage + '"  alt="Card image cap"></img></div>');
 
-          var eventDate = event.activityStartDate;
+                //   var backgroundImg = event.logoUrlAdr;
+                //   $('.activity-card-body').css('background-image', 'url(' + backgroundImg + ')');
 
-          var dateLength = eventDate.length;
-
-          if (dateLength>10) {
-            var activityDate = eventDate.substr(0,10);
-        }
-
-          // $("#activities-section").append('<p> Activity End Date: '+ event.activityEndDate +'</p>');
-
-          var eventText = event.assetDescriptions[0].description;
-          
-           $('img').removeAttr('src');
-
-          var activityImage = event.logoUrlAdr;
-          console.log(activityImage);
-
-          $('.card-image-top').attr('src', activityImage);
-          
-
-          var len = eventText.length;
-          
-          if(len>500) {
-              var shortStr = eventText.substr(0,500)+'...';
-          }
-
-          $("#activities-section").append('<div class = "card-deck shadow p-3 mb-5 bg-white rounded activity-card"><div class = "card-header activity-card-header">Activity Date: ' + activityDate + '<div class= "card body activity-card-body"><p class = "activity-text" Activity Description: '+ shortStr +'</p></div><div></div>');
-
-            //   var backgroundImg = event.logoUrlAdr;
-            //   $('.activity-card-body').css('background-image', 'url(' + backgroundImg + ')');
+            });
 
 
         });
-
-
-
-
     });
+
 });
 
 // 
