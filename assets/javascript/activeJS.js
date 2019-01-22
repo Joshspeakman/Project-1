@@ -155,7 +155,7 @@ $('#run-search').on('click', function () { //begin user submit event
         // Log the resulting object
         console.log(response);
 
-            $("#weather").append(response.list[0].weather[0].main);
+            $("#weather").append(response.list[0].weather[0]);
 
 
     }); //end openweather ajax 
