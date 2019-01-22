@@ -102,13 +102,17 @@ input {
   background: rgba(255, 136, 0, 0.932);
 }
 
+
+.activity-card {
+  border: 1px solid black;
+}
 .card-header {
   font-weight: bold;
 }
 
 .card-img-top {
-  height: 40%;
-  width: 30%;
+  height: 30%;
+  width: auto;
 }
 
 .activity-card-body {
