@@ -58,7 +58,7 @@ $(document).ready(function() {
         var queryStartDate = '&start_date=' + startDate + '..'; //two periods at end tell API request to search from that date forward
         console.log(queryStartDate);
 
-        var endDate = moment(startDate).add(5, 'days').format('YYYY-MM-DD');//.add(1, 'y').format('YYYY-MM-DD');
+        var endDate = moment(startDate).add(1, 'y').format('YYYY-MM-DD');
         var queryEndDate = endDate;
         console.log(queryEndDate);
 
@@ -158,6 +158,8 @@ $(document).ready(function() {
                 var activityImage = events.logo.original.url;
                 console.log(activityImage);
 
+                var activityLink = events.url;
+
                 // $('.card-image-top').attr('src', activityImage);
             
 
@@ -197,6 +199,11 @@ $(document).ready(function() {
                             // console.log('Forecast is for :' + forecast); 
                             break;
 
+                            default:
+
+                            forecast = 'Weather Not Available Yet For This Date.';
+                            weatherIconCode = "";
+
                         }
                     }
 
@@ -211,25 +218,42 @@ $(document).ready(function() {
             
             
 
-                $("#activities-section").append('\
-                <div class = "card-deck shadow p-3 mb-5 bg-white rounded activity-card">\
-                    <div class = "card">\
-                        <img class="card-img-top" src="'+ activityImage + '"  alt="Card image cap">\
-                            <div class = "card-header activity-card-header">Activity Date: ' + activityDate + '\
-                                <div class= "card body activity-card-body">\
-                                    <p class = "activity-text"> Activity Description: '+ eventText +'</p><hr>\
-                                    <div id = "weather"> Weather Forecast: '+ weatherOnDate +'\
-                                    <img id="weather-icon" src="' + weatherIcon +'" alt="Icon for Current Weather">\
-                                    </div>\
-                                </div>\
-                            </div>\
-                    </div>\
-                </div>');
+                // $("#activities-section").append('\
+                // <div class = "card-deck shadow p-3 mb-5 bg-white rounded activity-card">\
+                //     <div class = "card">\
+                //         <img class="card-img-top" src="'+ activityImage + '"  alt="Card image cap">\
+                //             <div class = "card-header activity-card-header">Activity Date: ' + activityDate + '\
+                //                 <div class= "card body activity-card-body">\
+                //                     <p class = "activity-text"> Activity Description: '+ eventText +'</p><hr>\
+                //                     <div id = "weather"> Weather Forecast: '+ weatherOnDate +'\
+                //                     <img id="weather-icon" src="' + weatherIcon +'" alt="Icon for Current Weather">\
+                //                     </div>\
+                //                 </div>\
+                //             </div>\
+                //     </div>\
+                // </div>');
 
-                // $("#activities-section").append('<div class = "card"><img class="card-img-top" src="'+ activityImage + '"  alt="Card image cap"></img></div>');
+                $("#activities-section").append(`
+                <div class="row">
+                    <div class="col s12 m7">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src= ${activityImage}>
+                            </div>
+                                <div class="card-content">
+                                    <div class="card-title"> Date: ${activityDate}</div>
+                                    <p>Activity: ${eventText}</p><hr>
+                                 </div>
+                                 <div id = "weather"> Weather Forecast: ${weatherOnDate}
+                                     <img id="weather-icon" src=${weatherIcon} alt="Icon for Current Weather">
+                                 </div>
+                            <div class="card-action">
+                                <a href=${activityLink}>Click Here for More Information</a>
+                             </div>
+                        </div>
+                    </div>
+                </div>`);
 
-                //   var backgroundImg = event.logoUrlAdr;
-                //   $('.activity-card-body').css('background-image', 'url(' + backgroundImg + ')');
 
             });
 
