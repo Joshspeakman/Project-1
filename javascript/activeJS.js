@@ -133,7 +133,7 @@ $(document).ready(function() {
 
     
 
-            response1[0].events.forEach (function(event) {
+            response1[0].events.forEach (function(events) {
 
             //   $("#activities-section").append('Activity Date: ' + event.activityStartDate + '<hr>');
                 
@@ -180,10 +180,10 @@ $(document).ready(function() {
                     // console.log(whatTempDate);
                     // console.log(whatUnixDate);
                     
-                    console.log(unixEventDate);
+                    // console.log(unixEventDate);
 
                     if (unixEventDate = tempDateVar) {
-                        console.log('It Matches');
+                        // console.log('It Matches');
                     
                     
                         switch (response2[0].list[i].dt) {
@@ -208,8 +208,7 @@ $(document).ready(function() {
                 var weatherIcon = 'http://openweathermap.org/img/w/' + weatherIconCode +'.png';
                 // var weatherIcon = response2[0].list[0].weather[0].icon;
             
-                
-
+            
 
                 $("#activities-section").append('\
                 <div class = "card-deck shadow p-3 mb-5 bg-white rounded activity-card">\
@@ -217,7 +216,7 @@ $(document).ready(function() {
                         <img class="card-img-top" src="'+ activityImage + '"  alt="Card image cap">\
                             <div class = "card-header activity-card-header">Activity Date: ' + activityDate + '\
                                 <div class= "card body activity-card-body">\
-                                    <p class = "activity-text" Activity Description: '+ shortStr +'</p><hr>\
+                                    <p class = "activity-text" Activity Description: '+ eventText +'</p><hr>\
                                     <div id = "weather"> Weather Forecast: '+ weatherOnDate +'\
                                     <img id="weather-icon" src="' + weatherIcon +'" alt="Icon for Current Weather">\
                                     </div>\
