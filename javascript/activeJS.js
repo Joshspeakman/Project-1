@@ -11,36 +11,40 @@ $(document).ready(function() {
     function buildQueryURL() {
 
 
-        queryURL = 'https://api.amp.active.com/v2/search/?';
+        queryURL = 'https://www.eventbriteapi.com/v3/events/search/?';
         console.log(queryURL);
 
 
-        var queryParams = '&api_key=3bxc5qpjw2rq4ffsnssvztxk';
+        var queryParams = '&token=R2LRNHXRFJEYG62UI2Q3';
 
-        var pages = '&current_page=1&per_page=10&sort=distance';
+        // https://www.eventbriteapi.com/v3
 
-        var excludeChildren = '&exclude_children=false';
+        // R2LRNHXRFJEYG62UI2Q3
+
+        // var pages = '&current_page=1&per_page=10&sort=distance';
+
+        // var excludeChildren = '&exclude_children=false';
 
         console.log(queryParams);
 
         var activity = $('#search').val().trim();
-        var queryActivity = '&query=' + activity;
+        var queryActivity = 'q=' + activity;
 
         // console.log(activity);
         console.log(queryActivity);
 
         city = $('#city').val().trim();
-        var queryCity = '&city=' + city;
+        var queryCity = '&location.address=' + city;
         // console.log('The city is:'+city);
 
         console.log(queryCity);
 
-        var state = $('#state').val().trim();
-        var queryState = '&state=' + state;
-        console.log(queryState);
+        // var state = $('#state').val().trim();
+        // var queryState = '&state=' + "mi" + state;
+        // console.log(queryState);
 
         var radius = $('#miles').val().trim();
-        var queryRadius = 'radius=' + radius;
+        var queryRadius = '&location.within=' + radius + 'mi';
         console.log(queryRadius);
 
         var weatherStartDate = moment().format('YYYY-MM-DD');
@@ -58,7 +62,8 @@ $(document).ready(function() {
         var queryEndDate = endDate;
         console.log(queryEndDate);
 
-        queryURL = queryURL + queryRadius + queryCity + queryState + queryStartDate + queryEndDate + queryActivity + pages + excludeChildren + queryParams;
+        // queryState + queryStartDate + queryEndDate + queryActivity
+        queryURL = queryURL + queryRadius + queryCity + queryParams;
         console.log(queryURL);
     }
 
@@ -128,13 +133,13 @@ $(document).ready(function() {
 
     
 
-            response1[0].results.forEach (function(event) {
+            response1[0].events.forEach (function(event) {
 
             //   $("#activities-section").append('Activity Date: ' + event.activityStartDate + '<hr>');
                 
 
 
-                eventDate = event.activityStartDate;
+                eventDate = events.start.local;
 
                 var dateLength = eventDate.length;
 
@@ -144,22 +149,22 @@ $(document).ready(function() {
 
                 // $("#activities-section").append('<p> Activity End Date: '+ event.activityEndDate +'</p>');
 
-                var eventText = event.assetDescriptions[0].description;
+                var eventText = events.description.html;
             
                 // $('img').remove();
 
 
-                var activityImage = event.logoUrlAdr;
+                var activityImage = events.logo.original.url;
                 console.log(activityImage);
 
-                $('.card-image-top').attr('src', activityImage);
+                // $('.card-image-top').attr('src', activityImage);
             
 
-                var len = eventText.length;
+                // var len = eventText.length;
             
-                if(len>500) {
-                    var shortStr = eventText.substr(0,500)+'...';
-                }
+                // if(len>500) {
+                //     var shortStr = eventText.substr(0,500)+'...';
+                // }
 
                 // Immediatly below code gets weather info
                 var unixEventDate = moment(activityDate).unix();
