@@ -146,7 +146,7 @@ $(document).ready(function() {
 
                 var eventText = event.assetDescriptions[0].description;
             
-                $('img').remove();
+                // $('img').remove();
 
 
                 var activityImage = event.logoUrlAdr;
