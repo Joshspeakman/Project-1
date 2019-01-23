@@ -149,7 +149,8 @@ $(document).ready(function() {
 
                 // $("#activities-section").append('<p> Activity End Date: '+ event.activityEndDate +'</p>');
 
-                var eventText = events.description.html;
+                var eventText = events.name.text;
+                console.log(eventText);
             
                 // $('img').remove();
 
@@ -216,7 +217,7 @@ $(document).ready(function() {
                         <img class="card-img-top" src="'+ activityImage + '"  alt="Card image cap">\
                             <div class = "card-header activity-card-header">Activity Date: ' + activityDate + '\
                                 <div class= "card body activity-card-body">\
-                                    <p class = "activity-text" Activity Description: '+ eventText +'</p><hr>\
+                                    <p class = "activity-text"> Activity Description: '+ eventText +'</p><hr>\
                                     <div id = "weather"> Weather Forecast: '+ weatherOnDate +'\
                                     <img id="weather-icon" src="' + weatherIcon +'" alt="Icon for Current Weather">\
                                     </div>\
