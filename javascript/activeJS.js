@@ -171,11 +171,13 @@ $(document).ready(function() {
 
                 // Immediatly below code gets weather info
                 var unixEventDate = moment(activityDate).unix();
-                // console.log(unixEventDate);
+                var regEventDate = moment.unix(unixEventDate).format('YYYY-MM-DD');
+                // console.log('Unix Date is ' + unixEventDate);
 
                 for (i=0; i<response2[0].list.length; i++) {
                     // console.log('i = '+ i)
                     var tempDateVar = response2[0].list[i].dt;
+                    var regWeatherDate = moment.unix(tempDateVar).format('YYYY-MM-DD');
                     // console.log('Date from weather array is :'+ tempDateVar);
                     // var whatTempDate = typeof(tempDateVar);
                     // var whatUnixDate = typeof(unixEventDate);
@@ -183,28 +185,26 @@ $(document).ready(function() {
                     // console.log(whatTempDate);
                     // console.log(whatUnixDate);
                     
-                    // console.log(unixEventDate);
+                    console.log('Event Date Here is: ' + regEventDate);
+                    console.log('The Weather Date Here is: ' + regWeatherDate);
 
-                    if (unixEventDate = tempDateVar) {
-                        // console.log('It Matches');
+                    // unixEventDate=tempDateVar; //Test condition for equals operator below
+
+                    if (regEventDate === regWeatherDate) {
+                        console.log('It Matches');
+                        console.log('Unix Date for event is ' + regEventDate);
+                        console.log('Date from weather array is :'+ regWeatherDate);
                     
                     
-                        switch (response2[0].list[i].dt) {
-                            case unixEventDate:
-
                             // console.log('Made it Here!!!!!!!');
                             forecast = response2[0].list[i].weather[0].main;
                             weatherIconCode = response2[0].list[i].weather[0].icon;
-
-                            // console.log('Forecast is for :' + forecast); 
                             break;
+                    }
 
-                            default:
-
-                            forecast = 'Weather Not Available Yet For This Date.';
+                    else {forecast = 'Weather Not Available Yet For This Date.';
                             weatherIconCode = "";
-
-                        }
+                        
                     }
 
                 }
