@@ -1,6 +1,11 @@
 $(document).ready(function() {
 
     var queryURL;
+    var weatherQueryURL;
+    var city;
+    var eventDate;
+    var activityDate;
+    var forecast;
 
 
     function buildQueryURL() {
@@ -24,7 +29,7 @@ $(document).ready(function() {
         // console.log(activity);
         console.log(queryActivity);
 
-        var city = $('#city').val().trim();
+        city = $('#city').val().trim();
         var queryCity = '&city=' + city;
         // console.log('The city is:'+city);
 
@@ -49,7 +54,7 @@ $(document).ready(function() {
         var queryStartDate = '&start_date=' + startDate + '..'; //two periods at end tell API request to search from that date forward
         console.log(queryStartDate);
 
-        var endDate = moment(startDate).add(1, 'y').format('YYYY-MM-DD');
+        var endDate = moment(startDate).add(5, 'days').format('YYYY-MM-DD');//.add(1, 'y').format('YYYY-MM-DD');
         var queryEndDate = endDate;
         console.log(queryEndDate);
 
@@ -57,11 +62,26 @@ $(document).ready(function() {
         console.log(queryURL);
     }
 
+    function buildWeatherQueryURL(weatherStartDate,weatherEndDate,city) {
+        var weatherAPIKey = "21523de10c9a466981da36b75e628021";
+        city = $('#city').val().trim();
+
+        var weatherQueryCity = 'q=' + city;
+
+        weatherQueryURL = "https://api.openweathermap.org/data/2.5/forecast?" + weatherQueryCity + ",us&APPID=" + weatherAPIKey;
+
+        console.log(weatherQueryURL);
+
+    }
+
+
+
 
 
     $('#run-search').on('click', function () {
         event.preventDefault(); 
         buildQueryURL(); //call function to build query
+        buildWeatherQueryURL();
 
         //     //Data request using AJAX GET request
         //     $.ajax({
@@ -98,31 +118,35 @@ $(document).ready(function() {
 
         // window.location.href = "activity_page.html";
 
-        $.getJSON(queryURL, function (response) {
+        $.when(
+            $.getJSON(queryURL),
+            $.getJSON(weatherQueryURL)
+        ).done(function (response1,response2) {
             // $("#activities-section").text(JSON.stringify(response));
-            console.log(response);
+            console.log(response1);
+            console.log(response2);
 
     
 
-            response.results.forEach (function(event) {
+            response1[0].results.forEach (function(event) {
 
             //   $("#activities-section").append('Activity Date: ' + event.activityStartDate + '<hr>');
                 
 
 
-                var eventDate = event.activityStartDate;
+                eventDate = event.activityStartDate;
 
                 var dateLength = eventDate.length;
 
                 if (dateLength>10) {
-                var activityDate = eventDate.substr(0,10);
+                activityDate = eventDate.substr(0,10);
                 }
 
                 // $("#activities-section").append('<p> Activity End Date: '+ event.activityEndDate +'</p>');
 
                 var eventText = event.assetDescriptions[0].description;
             
-                $('div').remove('img');
+                // $('img').remove();
 
 
                 var activityImage = event.logoUrlAdr;
@@ -137,7 +161,65 @@ $(document).ready(function() {
                     var shortStr = eventText.substr(0,500)+'...';
                 }
 
-                $("#activities-section").append('<div class = "card-deck shadow p-3 mb-5 bg-white rounded activity-card"><div class = "card"><img class="card-img-top" src="'+ activityImage + '"  alt="Card image cap"><div class = "card-header activity-card-header">Activity Date: ' + activityDate + '<div class= "card body activity-card-body"><p class = "activity-text" Activity Description: '+ shortStr +'</p></div></div></div></div>');
+                // Immediatly below code gets weather info
+                var unixEventDate = moment(activityDate).unix();
+                // console.log(unixEventDate);
+
+                for (i=0; i<response2[0].list.length; i++) {
+                    // console.log('i = '+ i)
+                    var tempDateVar = response2[0].list[i].dt;
+                    // console.log('Date from weather array is :'+ tempDateVar);
+                    // var whatTempDate = typeof(tempDateVar);
+                    // var whatUnixDate = typeof(unixEventDate);
+
+                    // console.log(whatTempDate);
+                    // console.log(whatUnixDate);
+                    
+                    console.log(unixEventDate);
+
+                    if (unixEventDate = tempDateVar) {
+                        console.log('It Matches');
+                    
+                    
+                        switch (response2[0].list[i].dt) {
+                            case unixEventDate:
+
+                            // console.log('Made it Here!!!!!!!');
+                            forecast = response2[0].list[i].weather[0].main;
+                            weatherIconCode = response2[0].list[i].weather[0].icon;
+
+                            // console.log('Forecast is for :' + forecast); 
+                            break;
+
+                        }
+                    }
+
+                }
+                
+        
+                var weatherOnDate = forecast;
+                // console.log(weatherOnDate);
+                // console.log(weatherIconCode);
+                var weatherIcon = 'http://openweathermap.org/img/w/' + weatherIconCode +'.png';
+                // var weatherIcon = response2[0].list[0].weather[0].icon;
+            
+                
+
+
+                $("#activities-section").append('\
+                <div class = "card-deck shadow p-3 mb-5 bg-white rounded activity-card">\
+                    <div class = "card">\
+                        <img class="card-img-top" src="'+ activityImage + '"  alt="Card image cap">\
+                            <div class = "card-header activity-card-header">Activity Date: ' + activityDate + '\
+                                <div class= "card body activity-card-body">\
+                                    <p class = "activity-text" Activity Description: '+ shortStr +'</p><hr>\
+                                    <div id = "weather"> Weather Forecast: '+ weatherOnDate +'\
+                                    <img id="weather-icon" src="' + weatherIcon +'" alt="Icon for Current Weather">\
+                                    </div>\
+                                </div>\
+                            </div>\
+                    </div>\
+                </div>');
 
                 // $("#activities-section").append('<div class = "card"><img class="card-img-top" src="'+ activityImage + '"  alt="Card image cap"></img></div>');
 
