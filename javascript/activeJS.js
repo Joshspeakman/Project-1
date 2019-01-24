@@ -84,7 +84,7 @@ $(document).ready(function() {
 
 
     $('#run-search').on('click', function () {
-        $("activities-section").empty();
+        $("#activities-section").empty();
         event.preventDefault(); 
         buildQueryURL(); //call function to build query
         buildWeatherQueryURL();
