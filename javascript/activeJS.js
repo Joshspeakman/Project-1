@@ -51,6 +51,8 @@ $(document).ready(function() {
             $.getJSON(weatherQueryURL)
         ).done(function (response1,response2) {
 
+            console.log(response2);
+
             response1[0].events.forEach (function(events) {
 
                 eventDate = events.start.local;
