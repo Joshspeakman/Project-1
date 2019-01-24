@@ -7,12 +7,17 @@
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500" rel="stylesheet" />
 
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-    crossorigin="anonymous">
+  <!-- Link Materialize -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
 
   <!--Moment Link -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+
+  <!-- Link Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+    crossorigin="anonymous">
+
 
   <link href="css/main.css" rel="stylesheet" />
 
@@ -24,17 +29,17 @@
   <div class="main-content">
     <form>
       <div class="title">
-        <h1>Stay Active</h1>
+        <h1>Get Out and Explore</h1>
       </div>
       <div class="inner-form">
-        <div class="input-field first">
+        <!-- <div class="input-field first">
           <input id="search" type="text" placeholder="LET'S DO..." />
-        </div>
+        </div> -->
         <div class="input-field second">
           <input class="search" id="city" type="text" placeholder="CITY" />
         </div>
         <div class="input-field third">
-          <input class="datepicker" id="state" type="text" placeholder="STATE" />
+          <input class="datepicker" id="state" type="text" placeholder="STATE" maxlength="2" />
         </div>
         <div class="input-field fouth">
           <input type="number" id="miles" placeholder="MILES AWAY">
@@ -47,11 +52,11 @@
     </form>
   </div>
 
+  <br>
 
-
-    <!-- This row will handle all of the retrieved activities -->
-    <div class="row">
-      <div class="col-sm-12">
+   <!-- This row will handle all of the retrieved activities -->
+   <div class="row">
+      <div class="col-s12-m7">
         <br>
 
         <!-- This card will initially be made up of a card and wells for each of the activities retrieved -->
@@ -61,14 +66,18 @@
           <div class="card-header">
             <strong>
               <i class="fa fa-table"></i> Search Results</strong>
+               <!-- This main card will hold each of the resulting articles -->
+              <div class="card-body" id="activities-section">
+              </div>
           </div>
 
-          <!-- This main card will hold each of the resulting articles -->
+          <!-- This main card will hold each of the resulting articles
           <div class="card-body" id="activities-section">
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
+
 
 
   <!-- <div class="card" style="width: 100%;" id="activities-section">
@@ -95,12 +104,11 @@
 
 
 
-  <script src="https://code.jquery.com/jquery.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-    crossorigin="anonymous"></script>
-  <script src="./javascript/activeJS.js"></script>
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="./javascript/activeJS.js"></script>
 
 
 </html>

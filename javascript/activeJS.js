@@ -27,11 +27,11 @@ $(document).ready(function() {
 
         console.log(queryParams);
 
-        var activity = $('#search').val().trim();
-        var queryActivity = 'q=' + activity;
+        // var activity = $('#search').val().trim();
+        // var queryActivity = 'q=' + activity;
 
         // console.log(activity);
-        console.log(queryActivity);
+        // console.log(queryActivity);
 
         city = $('#city').val().trim();
         var queryCity = '&location.address=' + city;
@@ -84,6 +84,7 @@ $(document).ready(function() {
 
 
     $('#run-search').on('click', function () {
+        $("activities-section").empty();
         event.preventDefault(); 
         buildQueryURL(); //call function to build query
         buildWeatherQueryURL();
@@ -234,7 +235,6 @@ $(document).ready(function() {
                 // </div>');
 
                 $("#activities-section").append(`
-                <div class="row">
                     <div class="col s12 m7">
                         <div class="card">
                             <div class="card-image">
@@ -251,7 +251,6 @@ $(document).ready(function() {
                                 <a href=${activityLink}>Click Here for More Information</a>
                              </div>
                         </div>
-                    </div>
                 </div>`);
 
 

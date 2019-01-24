@@ -1,4 +1,3 @@
-
 body {
   margin: 0;
 }
@@ -10,7 +9,7 @@ body {
       justify-content: center;
       align-items: center;
   font-family: 'Poppins', sans-serif;
-  background: url("../images/birthday.jpg");
+  background: url("../images/explore.jpg");
   background-size: cover;
   
 }
@@ -27,8 +26,9 @@ h1 {
   text-align: center;
 }
 
+
 .inner-form {
-  background: rgba(252, 150, 150, 0.5);
+  background: rgba(127, 151, 141, 0.5);
   padding: 16px;
   display: flex;
     -webkit-flex-wrap: wrap;
@@ -48,7 +48,7 @@ input {
   width: 100%;
   padding: 10px 20px 10px 45px;
   font-size: 16px;
-  color: #555;
+  color: rgb(230, 222, 222);
   font-weight: 400;
   font-family: 'Poppins', sans-serif;
 }
@@ -56,7 +56,7 @@ input {
 
 
 .input-field {
-  color: #9a9a9a;
+  color: #f8f0f0;
   font-size: 16px;
   font-weight: 400;
   text-transform: uppercase;
@@ -71,7 +71,7 @@ input {
 .fifth .btn-search {
   height: 70px;
   width: 100%;
-  background:red;
+  background:rgb(36, 32, 32);
   font-size: 20px;
   color: #fff;
   border: 0;
@@ -96,7 +96,7 @@ input {
   width: auto;
 }
 
-.activity-card-body {
+.card-content {
   padding: 1em;
   font-weight: 400;
 }
@@ -119,24 +119,4 @@ input {
   color: #fff;
   background: rgba(255, 136, 0, 0.932);
   border-color: rgba(255, 136, 0, 0.932);;
-}
-
-.card .card-image img {
-  display: block;
-  border-radius: 2px 2px 0 0;
-  position: relative;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  display: none;
-}
-
-#toTop{
-	position: fixed;
-	bottom: 10px;
-	right: 10px;
-	cursor: pointer;
-	display: none;
 }
