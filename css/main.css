@@ -83,6 +83,10 @@ input {
   background: rgba(255, 136, 0, 0.932);
 }
 
+.card .col {
+  margin-bottom: 2%;
+}
+
 
 .activity-card {
   border: 1px solid black;
@@ -90,6 +94,7 @@ input {
 .card-header {
   font-weight: bold;
 }
+
 
 .card-img-top {
   height: 30%;
