@@ -13,7 +13,6 @@ $(document).ready(function () {
     function buildQueryURL() {
 
         queryURL = 'https://www.eventbriteapi.com/v3/events/search/?';
-        console.log(queryURL);
 
         var queryParams = '&token=R2LRNHXRFJEYG62UI2Q3';
 
@@ -92,6 +91,7 @@ $(document).ready(function () {
                 }
 
                 var weatherOnDate = forecast;
+                console.log(weatherIcon);
 
                 $("#activities-section").append(`
                     <div class="col s12 m7">
