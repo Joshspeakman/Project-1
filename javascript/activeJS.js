@@ -122,7 +122,7 @@ $(document).ready(function () {
         // Scrolls to activities        
         $('html, body').animate({
             scrollTop: $('#activities-section').offset().top
-        }, 2500);
+        }, 2000);
 
     });
 
