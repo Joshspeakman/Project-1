@@ -2,7 +2,6 @@ body {
   margin: 0;
 }
 
-
 .main-content {
   min-height: 100vh;
   display: flex;
@@ -24,6 +23,7 @@ h1 {
   margin-bottom: 60px;
   font-weight: 400;
   text-align: center;
+  text-shadow: 2px 2px #050505;
 }
 
 
@@ -37,7 +37,6 @@ h1 {
       justify-content: space-between;
       align-items: center;
 }
-
 
 input {
   height: 70px;
@@ -54,7 +53,6 @@ input {
 }
 
 
-
 .input-field {
   color: #f8f0f0;
   font-size: 16px;
@@ -62,7 +60,6 @@ input {
   text-transform: uppercase;
   padding: 10px 0px 10px 0px;
 }
-
 
 .first, .second, .third, .fourth, .fifth {
   flex-grow: 1;
@@ -87,7 +84,6 @@ input {
   margin-bottom: 2%;
 }
 
-
 .activity-card {
   border: 1px solid black;
 }
@@ -95,10 +91,14 @@ input {
   font-weight: bold;
 }
 
-
 .card-img-top {
   height: 30%;
   width: auto;
+}
+
+.card-image img {
+  width: 100%;
+  height: 200;
 }
 
 .card-content {
@@ -125,3 +125,26 @@ input {
   background: rgba(255, 136, 0, 0.932);
   border-color: rgba(255, 136, 0, 0.932);;
 }
+#activities-section {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+
+@media only screen and (max-width: 900px) {
+  #activities-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+@media only screen and (max-width: 600px) {
+  #activities-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+@media only screen and (max-width: 400px) {
+  #activities-section {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
