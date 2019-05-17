@@ -27,11 +27,11 @@ Event finding application that incorporates multiple API calls. Allows user to c
 * Eventbrite and Open Weather APIs
 
 ### Authors
-* *Kelsey Tobin
-* *Dennis Ries
-* *Josh Speakman
-* *Keenan Thomposon
-* *Stevie Jarrell
+* Kelsey Tobin
+* Dennis Ries
+* Josh Speakman
+* Keenan Thomposon
+* Stevie Jarrell
 
 
 
