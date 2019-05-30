@@ -30,7 +30,7 @@ Event finding application that incorporates multiple API calls. Allows user to c
 * Kelsey Tobin
 * Dennis Ries
 * Josh Speakman
-* Keenan Thomposon
+* Keenan Pautler
 * Stevie Jarrell
 
 
